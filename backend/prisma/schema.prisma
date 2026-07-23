@@ -10,3 +10,52 @@ generator client {
 datasource db {
   provider = "mysql"
 }
+
+model User {
+  id           String            @id @default(uuid())
+  name         String
+  email        String            @unique
+  password     String
+  role         Role?             @default(USER)
+  createdAt    DateTime          @default(now())
+  updatedAt    DateTime          @updatedAt
+  appointments AppointmentSlot[]
+}
+
+model Doctor {
+  id           String            @id @default(uuid())
+  name         String
+  age          Int
+  specialty    String
+  image        String
+  day          Json
+  appointments AppointmentSlot[]
+}
+
+model AppointmentSlot {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  status    Status   @default(AVAILABLE)
+  expiresAt DateTime
+  userId    String?
+  doctorId  String
+  day       String
+  time      String
+  user      User?    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  doctor Doctor @relation(fields: [doctorId], references: [id], onDelete: Cascade)
+
+  @@unique([doctorId, day, time])
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+enum Status {
+  AVAILABLE
+  BOOKED
+  CANCELLED
+}

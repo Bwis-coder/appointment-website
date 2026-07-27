@@ -30,7 +30,6 @@ const Register = async (req, res) => {
         name,
       },
     });
-    const token = generateToken(newUser.id, res);
 
     res.status(201).json({
       data: {
@@ -39,7 +38,6 @@ const Register = async (req, res) => {
         name: newUser.name,
         email: newUser.email,
       },
-      token,
     });
   } catch (error) {
     console.error(error);
@@ -81,7 +79,7 @@ const logIn = async (req, res) => {
       });
     }
 
-    const token = generateToken(user.id, res);
+    generateToken(user.id, res);
 
     res.status(200).json({
       data: {
@@ -89,7 +87,6 @@ const logIn = async (req, res) => {
         id: user.id,
         email,
       },
-      token,
     });
   } catch (error) {
     console.error(error.message);

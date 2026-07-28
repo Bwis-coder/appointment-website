@@ -66,7 +66,7 @@ const logIn = async (req, res) => {
     if (!user) {
       return res.status(404).json({
         status: "error",
-        message: "user does not exist register as a new user",
+        message: "user does not exist, register as a new user",
       });
     }
 

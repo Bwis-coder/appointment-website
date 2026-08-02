@@ -1,6 +1,6 @@
-import "./auths-css/login.css";
+import "../auths-css/login.css";
 import { useState } from "react";
-import { getInput } from "./index.JS";
+import { getInput } from "./index.js";
 
 const LogIn = () => {
   const [email, setEmail] = useState("");
@@ -8,17 +8,18 @@ const LogIn = () => {
 
   return (
     <div id="login">
-      <form>
-        <div>
-          <h1>Welcome Back</h1>
-          <h3>log in to book appointment with a doctor</h3>
-        </div>
+      <div className="header-hero">
+        <h1>Welcome Back</h1>
+        <h3>Log in to manage your appointments.</h3>
+      </div>
 
-        <div>
+      <form className="form-login" id="form-login">
+        <p className="image-container">
           <img src="/doctorapp.svg" alt="Doctor appointment illustration" />
-        </div>
+        </p>
 
         <div>
+          <h1>Login</h1>
           <input
             type="email"
             value={email}
@@ -31,6 +32,8 @@ const LogIn = () => {
             value={password}
             onChange={(e) => getInput(e, setPassword)}
           />
+
+          <button>Login</button>
         </div>
       </form>
     </div>

@@ -15,3 +15,24 @@ body {
   font-family: "Roboto", sans-serif;
   font-size: 1.6rem;
 }
+
+a {
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+  transition:
+    color 0.3s ease,
+    opacity 0.3s ease;
+}
+
+a:hover {
+  opacity: 0.8;
+}
+
+a:active {
+  opacity: 0.6;
+}
+
+a:visited {
+  color: inherit;
+}

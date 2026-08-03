@@ -6,11 +6,11 @@
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  transition: ease 1s
+  transition: ease 1s;
 }
 
 #form-login {
-  scroll-margin-bottom: 10rem;
+  scroll-margin-bottom: 12em;
 }
 
 .form-login {

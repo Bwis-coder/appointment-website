@@ -11,3 +11,10 @@
   border-radius: 0.6rem;
   z-index: 1000;
 }
+
+@media (max-width: 36.81rem) {
+  .header-section {
+    top: auto;
+    bottom: 0;
+  }
+}

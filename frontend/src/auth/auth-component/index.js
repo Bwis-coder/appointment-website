@@ -5,9 +5,7 @@ const getInput = (e, set) => {
   set(e.target.value);
 };
 
-const register = async (e, object) => {
-  e.preventDefault();
-
+const register = async (object) => {
   const res = await axios.post(
     `${weburl}/auth/register`,
     {
@@ -17,15 +15,13 @@ const register = async (e, object) => {
     },
     {
       withCredentials: true,
-    }
+    },
   );
 
   return res.data;
 };
 
-const login = async (e, object) => {
-  e.preventDefault();
-
+const login = async (object) => {
   const res = await axios.post(
     `${weburl}/auth/login`,
     {
@@ -34,7 +30,7 @@ const login = async (e, object) => {
     },
     {
       withCredentials: true,
-    }
+    },
   );
 
   return res.data;

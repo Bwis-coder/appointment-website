@@ -1,11 +1,32 @@
 import "../auths-css/register.css";
 import { useState } from "react";
-import { getInput } from "./index.js";
+import { getInput, register } from "./index.js";
+import { useMutation } from "@tanstack/react-query";
 
 const Register = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const userDetails = {
+    name,
+    email,
+    password,
+  };
+
+  const createUser = useMutation({
+    mutationFn: () => register(userDetails),
+    onSuccess: () => {
+      setName("");
+      setEmail("");
+      setPassword("");
+    },
+  });
+
+  const submitFn = (e) => {
+    e.preventDefault();
+    createUser.mutate();
+  };
 
   return (
     <div id="register">
@@ -19,7 +40,7 @@ const Register = () => {
           <img src="/booking.svg" alt="Doctor appointment illustration" />
         </div>
 
-        <form className="form-register" id="form-register">
+        <form className="form-register" id="form-register" onSubmit={submitFn}>
           <h1>Create Account</h1>
           <input
             placeholder="name"
@@ -41,7 +62,7 @@ const Register = () => {
             onChange={(e) => getInput(e, setPassword)}
             value={password}
           />
-          <button>Register </button>
+          <button type="submit">Register </button>
         </form>
       </div>
     </div>

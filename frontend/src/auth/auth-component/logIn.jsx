@@ -1,10 +1,29 @@
 import "../auths-css/login.css";
 import { useState } from "react";
-import { getInput } from "./index.js";
+import { getInput, login } from "./index.js";
+import { useMutation } from "@tanstack/react-query";
 
 const LogIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const userDetails = {
+    email,
+    password,
+  };
+
+  const logIn = useMutation({
+    mutationFn: () => login(userDetails),
+    onSuccess: () => {
+      setEmail("");
+      setPassword("");
+    },
+  });
+
+  const submitFn = (e) => {
+    e.preventDefault();
+    logIn.mutate();
+  };
 
   return (
     <div id="login">
@@ -13,7 +32,7 @@ const LogIn = () => {
         <h3>Log in to manage your appointments.</h3>
       </div>
 
-      <form className="form-login" id="form-login">
+      <form className="form-login" id="form-login" onSubmit={submitFn}>
         <p className="image-container">
           <img src="/doctorapp.svg" alt="Doctor appointment illustration" />
         </p>
@@ -33,7 +52,7 @@ const LogIn = () => {
             onChange={(e) => getInput(e, setPassword)}
           />
 
-          <button>Login</button>
+          <button type="submit">Login</button>
         </div>
       </form>
     </div>

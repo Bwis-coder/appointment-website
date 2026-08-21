@@ -1,12 +1,13 @@
 import "../auths-css/register.css";
 import { useState } from "react";
-import { getInput, register } from "./index.js";
+import authFn from "../registery/auth.js";
 import { useMutation } from "@tanstack/react-query";
 
 const Register = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState(``);
 
   const userDetails = {
     name,
@@ -15,16 +16,31 @@ const Register = () => {
   };
 
   const createUser = useMutation({
-    mutationFn: () => register(userDetails),
+    mutationFn: () => authFn.register(userDetails),
     onSuccess: () => {
       setName("");
       setEmail("");
       setPassword("");
+
+      document
+        .getElementById("form-login")
+        ?.scrollIntoView({ behavior: "smooth" });
     },
   });
 
   const submitFn = (e) => {
     e.preventDefault();
+
+    if (!name || !email || !password) {
+      setError("Please complete all fields");
+
+      setTimeout(() => {
+        setError("");
+      }, 3000);
+
+      return;
+    }
+    <a href="#form-login"></a>;
     createUser.mutate();
   };
 
@@ -45,25 +61,40 @@ const Register = () => {
           <input
             placeholder="name"
             type="text"
-            onChange={(e) => getInput(e, setName)}
+            onChange={(e) => authFn.getInput(e, setName)}
             value={name}
+            autoComplete="name"
           />
 
           <input
             placeholder="Email"
             type="email"
-            onChange={(e) => getInput(e, setEmail)}
+            onChange={(e) => authFn.getInput(e, setEmail)}
             value={email}
+            autoComplete="email"
           />
 
           <input
             placeholder="password"
             type="password"
-            onChange={(e) => getInput(e, setPassword)}
+            onChange={(e) => authFn.getInput(e, setPassword)}
             value={password}
+            autoComplete="current-password"
           />
           <button type="submit">Register </button>
         </form>
+      </div>
+
+      <div>
+        {error && <h2 className="error">{error}</h2>}
+        {createUser.isSuccess && (
+          <h2 className="success">{createUser.data?.data?.status}</h2>
+        )}
+        {createUser.isError && (
+          <h2 className="error">
+            {createUser.error.response?.data?.data?.message}
+          </h2>
+        )}
       </div>
     </div>
   );

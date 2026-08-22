@@ -1,0 +1,35 @@
+.header {
+  width: 100%;
+  padding: 1rem;
+}
+
+.header-icon {
+  display: flex;
+  justify-content: space-evenly;
+  color: rgb(170, 164, 164);
+  align-items: center;
+  position: fixed;
+  right: 0;
+  top: 0;
+  left: 0;
+  background-color: rgb(10, 10, 83);
+  padding: 1rem;
+}
+
+.header-links {
+  display: flex;
+  margin-top: 4rem;
+  justify-content: flex-end;
+  gap: 2rem;
+  padding-right: 2rem;
+}
+
+.ig-icon {
+  color: rgb(194, 6, 147);
+  font-size: clamp(2rem, 3.3vw, 4rem);
+}
+
+.link-icon {
+  color: blue;
+  font-size: clamp(2rem, 3.3vw, 4rem);
+}

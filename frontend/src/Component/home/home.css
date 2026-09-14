@@ -1,0 +1,263 @@
+.home-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  max-width: 120rem;
+  margin: 0 auto;
+}
+
+.home-section {
+  width: 90%;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.home-div {
+  width: 100%;
+}
+
+.description-container h1 {
+  color: rgb(4, 4, 85);
+  font-size: clamp(2.5rem, 3.33vw, 3rem);
+  font-weight: 800;
+}
+
+.description-container h3 {
+  font-size: clamp(1.8rem, 2.5vw, 2rem);
+  font-weight: 500;
+  border-bottom: 1px solid rgb(60, 60, 117);
+  padding: 0.5rem;
+}
+
+.booking-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(24rem, 1fr));
+  margin-top: 3rem;
+  width: 100%;
+  padding: 2rem;
+  border-radius: 1rem;
+  align-content: space-evenly;
+  justify-items: center;
+  gap: 3rem;
+}
+
+.booking-section {
+  color: white;
+  background-color: rgb(7, 7, 82);
+  padding: 2rem;
+  border-radius: 2rem;
+  transition: ease 0.5s;
+  width: 100%;
+  box-sizing: border-box;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.booking-section:hover {
+  box-shadow: 0 0 2rem gray;
+}
+
+/* Doctor image */
+.doctor-image {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 0.5rem;
+}
+
+.doctor-image img {
+  width: 10rem;
+  height: 12rem;
+  object-fit: unset;
+  border-radius: 50%;
+  border: 4px solid white;
+  display: block;
+}
+
+/* Doctor information */
+.doctor-details {
+  width: 100%;
+  text-align: center;
+}
+
+.doctor-details h3 {
+  margin: 0.4rem 0;
+}
+
+/* Date and time */
+.timeDate-section {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  padding: 1rem 0;
+  justify-items: center;
+  align-content: center;
+}
+
+.timeDate-section > div {
+  width: 100%;
+}
+
+.timeDate-section select {
+  width: 100%;
+  padding: 0.8rem;
+  border: none;
+  border-radius: 0.5rem;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+
+.booking-section button {
+  background: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  width: 100%;
+  font-weight: 600;
+  cursor: pointer;
+  transition: ease 0.5s;
+}
+
+.booking-section button:hover {
+  background: rgb(248, 245, 245);
+  color: #2563eb;
+}
+
+/* Footer */
+.footer-container {
+  width: 100%;
+  background: #1f2937;
+  color: white;
+  margin-top: 5rem;
+  padding: 3rem 0 1.5rem;
+  box-sizing: border-box;
+}
+
+.footer-section {
+  width: 90%;
+  max-width: 120rem;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  gap: 3rem;
+}
+
+.footer-about {
+  width: 40%;
+}
+
+.footer-about h2 {
+  font-size: 2rem;
+  margin: 0 0 1rem;
+}
+
+.footer-about h3 {
+  font-size: 1.2rem;
+  margin: 0 0 0.7rem;
+}
+
+.footer-about p {
+  line-height: 1.6;
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+.footer-contact,
+.footer-social {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.footer-contact h3,
+.footer-social h3 {
+  font-size: 1.2rem;
+  margin: 0;
+}
+
+.footer-contact div {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+}
+
+.footer-social svg {
+  cursor: pointer;
+  font-size: 1.6rem;
+  transition: 0.3s ease;
+}
+
+.footer-social svg:hover {
+  color: #2563eb;
+}
+
+.footer-bottom {
+  width: 90%;
+  max-width: 120rem;
+  margin: 2rem auto 0;
+  padding-top: 1rem;
+  border-top: 1px solid #4b5563;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+/* Tablet */
+@media (max-width: 768px) {
+  .booking-container {
+    width: 100%;
+    padding: 1rem;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    box-sizing: border-box;
+  }
+
+  .booking-section {
+    padding: 1.5rem;
+  }
+
+  .doctor-image img {
+    width: 8rem;
+    height: 8rem;
+  }
+
+  .footer-section {
+    flex-direction: column;
+  }
+
+  .footer-about {
+    width: 100%;
+  }
+
+  .footer-contact,
+  .footer-social {
+    width: 100%;
+  }
+}
+
+/* Small phones */
+@media (max-width: 40rem) {
+  .booking-container {
+    grid-template-columns: 1fr;
+  }
+
+  .timeDate-section {
+    grid-template-columns: 1fr;
+  }
+
+  .description-container h1 {
+    font-size: 2rem;
+  }
+
+  .description-container h3 {
+    font-size: 1.2rem;
+  }
+}

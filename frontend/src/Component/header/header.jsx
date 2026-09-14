@@ -1,4 +1,4 @@
-import { headerDetails } from "../index.js";
+import { headerDetails } from "../index";
 import { NavLink } from "react-router-dom";
 import "./header.css";
 

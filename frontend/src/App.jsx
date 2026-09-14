@@ -1,4 +1,4 @@
-import { Home, Appointment, MainAuth } from "./Component/index.js";
+import { Home, Appointment, MainAuth } from "./Component/renderComponent.js";
 import { Routes, Route } from "react-router-dom";
 
 import "./App.css";

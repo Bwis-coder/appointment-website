@@ -4,12 +4,12 @@ import { connectDb, disconnectDb } from "./config/db.js";
 import "dotenv/config";
 import cookieParser from "cookie-parser";
 import cors from "cors";
+import doctorRoute from "./routes/doctorRoutes.js";
 
 connectDb();
 
 const app = express();
 const port = process.env.PORT;
-
 
 // body parser middlewares
 app.use(express.json());
@@ -22,10 +22,9 @@ app.use(
   }),
 );
 
-
-
 //Routes
 app.use("/auth", authRoute);
+app.use("/doctorDetails", doctorRoute);
 
 process.on("SIGINT", disconnectDb);
 process.on("SIGTERM", disconnectDb);

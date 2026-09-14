@@ -14,6 +14,7 @@
   left: 0;
   background-color: rgb(10, 10, 83);
   padding: 1rem;
+  z-index: 1000;
 }
 
 .header-links {
@@ -22,6 +23,7 @@
   justify-content: flex-end;
   gap: 2rem;
   padding-right: 2rem;
+  position: sticky;
 }
 
 .ig-icon {
@@ -33,3 +35,5 @@
   color: blue;
   font-size: clamp(2rem, 3.3vw, 4rem);
 }
+
+

@@ -76,7 +76,7 @@ const LoginPage = () => {
 
         {logFn.isError && (
           <h2 className="error">
-            {logFn.error?.response?.data?.data?.message}
+            {logFn.error?.response?.data?.message}
           </h2>
         )}
       </div>

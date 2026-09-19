@@ -5,6 +5,7 @@ import "dotenv/config";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import doctorRoute from "./routes/doctorRoutes.js";
+import appointmentRoute from "./routes/appointmentRoute.js";
 
 connectDb();
 
@@ -25,6 +26,7 @@ app.use(
 //Routes
 app.use("/auth", authRoute);
 app.use("/doctorDetails", doctorRoute);
+app.use("/book", appointmentRoute);
 
 process.on("SIGINT", disconnectDb);
 process.on("SIGTERM", disconnectDb);

@@ -14,7 +14,6 @@ import {
 } from "@fortawesome/free-brands-svg-icons";
 
 
-
 // header component
 const headerDetails = {
   FontAwesomeIcon,
@@ -44,6 +43,22 @@ class HomePage {
       withCredentials: true,
     });
     return (this.doctor = response.data?.data?.doctorItems);
+  }
+
+  async bookRequest(object) {
+    const res = await axios.post(
+      `${weburl}/book/bookAppointment`,
+      {
+        doctorId: object.doctorId,
+        time: object.time,
+        day: object.day,
+      },
+      {
+        withCredentials: true,
+      },
+    );
+
+    return res.data;
   }
 
   capitalized(word) {

@@ -36,6 +36,18 @@ class AuthFn {
 
     return res.data;
   }
+
+  async logOut() {
+    const response = await axios.post(
+      `${weburl}/auth/logout`,
+      {},
+      {
+        withCredentials: true,
+      },
+    );
+
+    return response.data;
+  }
 }
 
 const authFn = new AuthFn();

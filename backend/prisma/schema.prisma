@@ -25,14 +25,15 @@ model User {
 }
 
 model Doctor {
-  id           String            @id @default(uuid())
-  name         String
-  age          Int
-  specialty    String
-  image        String
-  userId       String
-  user         User              @relation(fields: [userId], references: [id], onDelete: Cascade)
-  appointments AppointmentSlot[]
+  id            String            @id @default(uuid())
+  name          String
+  age           Int
+  specialty     String
+  image         String
+  availableSlot Json
+  userId        String            @unique
+  user          User              @relation(fields: [userId], references: [id], onDelete: Cascade)
+  appointments  AppointmentSlot[]
 }
 
 model AppointmentSlot {

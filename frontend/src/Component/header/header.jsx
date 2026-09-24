@@ -2,24 +2,30 @@ import { headerDetails } from "../index";
 import { NavLink } from "react-router-dom";
 import "./header.css";
 
-const Header = () => {
+const Header = ({ setProfile }) => {
   return (
     <div className="header">
       <div className="header-icon">
         <h2>{headerDetails.name}</h2>
-        <NavLink to="/home">
+        <NavLink
+          to="/home"
+          className={({ isActive }) => (isActive ? "active" : "")}
+        >
           <h2>
             <headerDetails.FontAwesomeIcon icon={headerDetails.home} />
           </h2>
         </NavLink>
 
-        <NavLink to="/appointment">
+        <NavLink
+          to="/appointment"
+          className={({ isActive }) => (isActive ? "active" : "")}
+        >
           <h2>
             <headerDetails.FontAwesomeIcon icon={headerDetails.booking} />
           </h2>
         </NavLink>
 
-        <h2 className="profile">
+        <h2 className="profile" onClick={() => setProfile(true)}>
           <headerDetails.FontAwesomeIcon icon={headerDetails.profile} />
         </h2>
       </div>

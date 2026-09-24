@@ -44,7 +44,9 @@ const DoctorCard = ({ doctor, home }) => {
       </div>
 
       <div className="timeDate-section">
-        <div>{home.selectDay(day || "", (e) => setDay(e.target.value))}</div>
+        <div>
+          {home.selectDay(day || "", (e) => setDay(e.target.value), doctor)}
+        </div>
 
         <div>{home.selectTime(time || "", (e) => setTime(e.target.value))}</div>
       </div>
@@ -53,17 +55,19 @@ const DoctorCard = ({ doctor, home }) => {
         {home.appointmentButton}
       </button>
 
-      {bookingState && (
-        <p
-          className={
-            bookingState === "Appointment Booked"
-              ? "booking-success"
-              : "booking-error"
-          }
-        >
-          {bookingState}
-        </p>
-      )}
+      <div className="booking-status-wrapper">
+        {bookingState && (
+          <p
+            className={
+              bookingState === "Appointment Booked"
+                ? "booking-success"
+                : "booking-error"
+            }
+          >
+            {bookingState}
+          </p>
+        )}
+      </div>
     </div>
   );
 };

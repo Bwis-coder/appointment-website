@@ -13,7 +13,6 @@ import {
   faLinkedinIn,
 } from "@fortawesome/free-brands-svg-icons";
 
-
 // header component
 const headerDetails = {
   FontAwesomeIcon,
@@ -29,6 +28,8 @@ const headerDetails = {
 
 class HomePage {
   doctor = [];
+  getAppointment = [];
+
   constructor(home) {
     this.id = home.id;
     this.header = home.header;
@@ -36,6 +37,27 @@ class HomePage {
     this.button = home.button;
     this.footer = home.footer;
     this.appointmentButton = home.appointmentButton;
+    this.appointment = home.appointment;
+  }
+
+  async cancelAppointment(id) {
+    const response = await axios.put(
+      `${weburl}/book/cancelAppointment/${id}`,
+      {},
+      {
+        withCredentials: true,
+      },
+    );
+
+    return response;
+  }
+
+  async getAppointmentHistory() {
+    const response = await axios.get(`${weburl}/book/appointmentHistory`, {
+      withCredentials: true,
+    });
+
+    return (this.getAppointment = response?.data?.data);
   }
 
   async doctorDetails() {
@@ -75,15 +97,17 @@ class HomePage {
     state(e.target.value);
   }
 
-  selectDay(state, fn) {
+  selectDay(state, fn, doctor) {
     return (
       <select value={state} onChange={fn}>
         <option value="choose a day">Choose Day</option>
-        <option value="monday">Monday</option>
-        <option value="tuesday">Tuesday</option>
-        <option value="wednesday">Wednesday</option>
-        <option value="thursday">Thursday</option>
-        <option value="friday">Friday</option>
+        {doctor.availableSlot.map((slot) => {
+          return (
+            <option key={slot.day} value={slot.day}>
+              {slot.day}
+            </option>
+          );
+        })}
       </select>
     );
   }
@@ -92,6 +116,7 @@ class HomePage {
     return (
       <select value={state} onChange={fn}>
         <option value="choose time">Choose TIme</option>
+      
         <option value="10:00AM">10:00AM</option>
         <option value="12:00PM">12:00PM</option>
         <option value="3:00PM">3:00PM</option>
@@ -153,7 +178,7 @@ class HomePage {
   }
 }
 
-const homeDetails = [
+const app = [
   {
     id: crypto.randomUUID(),
     header: "Find the Right Doctor for You",
@@ -184,4 +209,4 @@ const homeDetails = [
   return new HomePage(home);
 });
 
-export { headerDetails, homeDetails };
+export { headerDetails, app };

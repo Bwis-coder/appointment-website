@@ -1,0 +1,32 @@
+.profile-menu {
+  position: absolute;
+  top: 4rem;
+  right: 2rem;
+  width: 10rem;
+  padding: 1rem;
+  background: rgb(255, 255, 255);
+  border-radius: 0.8rem;
+  box-shadow: 0 0 1rem rgba(0, 0, 0, 0.15);
+}
+
+.profile-menu h4 {
+  margin: 0;
+  text-align: right;
+  cursor: pointer;
+  color: #f40c0c;
+  padding: 0.5rem;
+}
+
+.profile-menu p {
+  margin: 1rem 0 0;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  color: #330574;
+  font-weight: 500;
+}
+
+.profile-menu p:hover {
+  background: #f1f5f9;
+  color: #2563eb;
+}

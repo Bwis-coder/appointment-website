@@ -4,26 +4,32 @@ import authFn from "../registery/auth.js";
 import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 
+const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
 const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const navigation = useNavigate();
 
-  const userDetails = {
-    email,
-    password,
-  };
-
   const logFn = useMutation({
-    mutationFn: () => authFn.login(userDetails),
+    // userDetails is an object the state is added in the submitFn
+
+    mutationFn: async (userDetails) => {
+      try {
+        const result = await authFn.login(userDetails);
+        await wait(3000);
+        return result;
+      } catch (err) {
+        await wait(3000);
+        throw err;
+      }
+    },
     onSuccess: () => {
       setEmail("");
       setPassword("");
       navigation("/home");
-    },
-    onError: () => {
-      return `invalid emall or password`;
+      window.scrollTo(0, 0);
     },
   });
 
@@ -31,16 +37,20 @@ const LoginPage = () => {
     e.preventDefault();
     if (!email || !password) {
       setError("please complete all the fields");
-      setTimeout(() => {
-        setError("");
-      }, 3000);
+      setTimeout(() => setError(""), 3000);
       return;
     }
-    logFn.mutate();
+    logFn.mutate({ email, password });
   };
 
   return (
     <div id="login">
+      {logFn.isPending && (
+        <div className="loading-container">
+          <p>Logging in...</p>
+          <img src="/loading-spanner.svg" alt="Loading" />
+        </div>
+      )}
       <div className="header-hero">
         <h1>Welcome Back</h1>
         <h3>Log in to manage your appointments.</h3>
@@ -65,7 +75,6 @@ const LoginPage = () => {
             value={password}
             onChange={(e) => authFn.getInput(e, setPassword)}
           />
-
           <button type="submit">Login</button>
         </div>
       </form>
@@ -75,9 +84,7 @@ const LoginPage = () => {
         {error && <h2 className="error">{error}</h2>}
 
         {logFn.isError && (
-          <h2 className="error">
-            {logFn.error?.response?.data?.message}
-          </h2>
+          <h2 className="error">{logFn.error?.response?.data?.message}</h2>
         )}
       </div>
     </div>

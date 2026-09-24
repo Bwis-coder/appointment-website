@@ -3,20 +3,25 @@ import { useState } from "react";
 import authFn from "../registery/auth.js";
 import { useMutation } from "@tanstack/react-query";
 
+const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
 const Register = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState(``);
-
-  const userDetails = {
-    name,
-    email,
-    password,
-  };
+  const [error, setError] = useState("");
 
   const createUser = useMutation({
-    mutationFn: () => authFn.register(userDetails),
+    mutationFn: async (userDetails) => {
+      try {
+        const result = await authFn.register(userDetails);
+        await wait(3000);
+        return result;
+      } catch (err) {
+        await wait(3000);
+        throw err;
+      }
+    },
     onSuccess: () => {
       setName("");
       setEmail("");
@@ -33,19 +38,22 @@ const Register = () => {
 
     if (!name || !email || !password) {
       setError("Please complete all fields");
-
-      setTimeout(() => {
-        setError("");
-      }, 3000);
-
+      setTimeout(() => setError(""), 3000);
       return;
     }
-    <a href="#form-login"></a>;
-    createUser.mutate();
+
+    createUser.mutate({ name, email, password });
   };
 
   return (
     <div id="register">
+      {createUser.isPending && (
+        <div className="loading-container">
+          <p>Creating Account...</p>
+          <img src="/loading-spanner.svg" alt="Loading" />
+        </div>
+      )}
+
       <div className="hero">
         <h1>Appointment App</h1>
         <h3>Book appointments with trusted doctors.</h3>
@@ -79,9 +87,9 @@ const Register = () => {
             type="password"
             onChange={(e) => authFn.getInput(e, setPassword)}
             value={password}
-            autoComplete="current-password"
+            autoComplete="new-password"
           />
-          <button type="submit">Register </button>
+          <button type="submit">Register</button>
         </form>
       </div>
 

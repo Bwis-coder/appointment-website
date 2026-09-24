@@ -1,24 +1,28 @@
-import { Header } from "../renderComponent.js";
-import { homeDetails } from "../index.jsx";
+import { Header, Profile } from "../renderComponent.js";
+import { app } from "../index.jsx";
 import { useQuery } from "@tanstack/react-query";
 import DoctorCard from "./doctorCard.jsx";
+import { useState } from "react";
 import "./home.css";
 
 const Home = () => {
-  const { data } = useQuery({
-    queryKey: ["doctors"],
-    queryFn: () => {
-      return homeDetails[0].doctorDetails();
-    },
-  });
+  const [profile, setProfile] = useState(false);
+
+ const { data } = useQuery({
+   queryKey: ["doctors"],
+   queryFn: () => {
+     return app[0].doctorDetails();
+   },
+   refetchOnWindowFocus: true,
+ });
 
   return (
     <div className="home-container">
-      <Header />
+      <Header setProfile={setProfile} />
 
       {data && (
         <div className="home-section">
-          {homeDetails.map((home) => {
+          {app.map((home) => {
             return (
               <div key={home.id} className="home-div">
                 <div className="description-container">
@@ -39,6 +43,8 @@ const Home = () => {
           })}
         </div>
       )}
+
+      {profile && <Profile setProfile={setProfile} />}
     </div>
   );
 };

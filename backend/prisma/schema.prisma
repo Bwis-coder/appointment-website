@@ -8,7 +8,7 @@ generator client {
 }
 
 datasource db {
-  provider = "mysql"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
@@ -31,7 +31,7 @@ model Doctor {
   specialty     String
   image         String
   availableSlot Json
-  userId        String            @unique
+  userId        String            
   user          User              @relation(fields: [userId], references: [id], onDelete: Cascade)
   appointments  AppointmentSlot[]
 }

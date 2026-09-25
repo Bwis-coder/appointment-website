@@ -1,3 +1,3 @@
-const weburl = "https://medibook-backend-thti.onrender.com";
+const weburl = import.meta.env.VITE_WEBURL;
 
 export default weburl;

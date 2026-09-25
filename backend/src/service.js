@@ -1,24 +1,26 @@
 import express from "express";
-import { connectDb, disconnectDb } from "./config/db.js";
 import authRoute from "./routes/authRoutes.js";
-import doctorRoute from "./routes/doctorRoutes.js";
-import appointmentRoute from "./routes/appointmentRoute.js";
+import { connectDb, disconnectDb } from "./config/db.js";
+import "dotenv/config";
 import cookieParser from "cookie-parser";
 import cors from "cors";
+import doctorRoute from "./routes/doctorRoutes.js";
+import appointmentRoute from "./routes/appointmentRoute.js";
 import path from "path";
 import { fileURLToPath } from "url";
 
-import { config } from "dotenv";
-config();
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 connectDb();
 
 const app = express();
 const port = process.env.PORT || 5001;
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
+// body parser middlewares
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
 app.use(
   cors({
     origin: process.env.FRONTEND_URL,
@@ -26,29 +28,22 @@ app.use(
   }),
 );
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-app.use(cookieParser());
-
-// Routes
+//Routes
 app.use("/auth", authRoute);
 app.use("/doctorDetails", doctorRoute);
 app.use("/book", appointmentRoute);
 
-// Serve frontend in production
-if (process.env.NODE_ENV === "production") {
-  console.log("Production mode: serving frontend from dist");
+// Serve the built frontend
+const frontendPath = path.join(__dirname, "../../frontend/dist");
+app.use(express.static(frontendPath));
 
-  app.use(express.static(path.join(__dirname, "../../frontend/dist")));
-
-  app.get("/{*path}", (req, res) => {
-    res.sendFile(path.join(__dirname, "../../frontend/dist", "index.html"));
-  });
-}
+app.get(/.*/, (req, res) => {
+  res.sendFile(path.join(frontendPath, "index.html"));
+});
 
 process.on("SIGINT", disconnectDb);
 process.on("SIGTERM", disconnectDb);
 
 app.listen(port, () => {
-  console.log(`server running on port ${port}`);
+  console.log(`server running on: ${process.env.BACKEND_URL}`);
 });

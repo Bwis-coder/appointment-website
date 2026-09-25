@@ -6,10 +6,9 @@ import "../auths-css/main.css";
 const MainAuth = () => {
   return (
     <div className="auth-container">
-       <Header />
+      <Header />
       <Register />
       <Login />
-     
     </div>
   );
 };

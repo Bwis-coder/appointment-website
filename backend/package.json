@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon src/service.js",
     "start": "node src/service.js",
-    "seeding": "node src/seeding.js"
+    "seeding": "node src/seeding.js",
+    "build": "cd ../frontend && npm install && npm run build"
   },
   "keywords": [],
   "author": "",

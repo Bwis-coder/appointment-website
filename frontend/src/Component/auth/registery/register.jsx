@@ -64,33 +64,66 @@ const Register = () => {
           <img src="/booking.svg" alt="Doctor appointment illustration" />
         </div>
 
-        <form className="form-register" id="form-register" onSubmit={submitFn}>
+        <div>
           <h1>Create Account</h1>
-          <input
-            placeholder="name"
-            type="text"
-            onChange={(e) => authFn.getInput(e, setName)}
-            value={name}
-            autoComplete="name"
-          />
 
-          <input
-            placeholder="Email"
-            type="email"
-            onChange={(e) => authFn.getInput(e, setEmail)}
-            value={email}
-            autoComplete="email"
-          />
+          <div>
+            <form
+              className="form-register"
+              id="form-register"
+              onSubmit={submitFn}
+            >
+              <div>
+                <label htmlFor="name-input">
+                  <img src="/name.svg" alt="" />
+                </label>
+                <input
+                  placeholder="name"
+                  required
+                  type="text"
+                  id="name-input"
+                  onChange={(e) => authFn.getInput(e, setName)}
+                  value={name}
+                  autoComplete="name"
+                />
+              </div>
 
-          <input
-            placeholder="password"
-            type="password"
-            onChange={(e) => authFn.getInput(e, setPassword)}
-            value={password}
-            autoComplete="new-password"
-          />
-          <button type="submit">Register</button>
-        </form>
+              <div>
+                <label htmlFor="email-input">
+                  <span>@</span>
+                </label>
+                <input
+                  placeholder="Email"
+                  required
+                  type="email"
+                  id="email-input"
+                  onChange={(e) => authFn.getInput(e, setEmail)}
+                  value={email}
+                  autoComplete="email"
+                />
+              </div>
+
+              <div>
+                <label htmlFor="password-input">
+                  <img src="/lock.svg" alt="" />
+                </label>
+                <input
+                  required
+                  placeholder="password"
+                  type="password"
+                  id="password-input"
+                  onChange={(e) => authFn.getInput(e, setPassword)}
+                  value={password}
+                  autoComplete="new-password"
+                />
+              </div>
+
+              <div>
+                <button type="submit">Register</button>
+              </div>
+            </form>
+          </div>
+        </div>
       </div>
 
       <div>

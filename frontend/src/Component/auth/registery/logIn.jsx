@@ -13,8 +13,6 @@ const LoginPage = () => {
   const navigation = useNavigate();
 
   const logFn = useMutation({
-    // userDetails is an object the state is added in the submitFn
-
     mutationFn: async (userDetails) => {
       try {
         const result = await authFn.login(userDetails);
@@ -51,33 +49,54 @@ const LoginPage = () => {
           <img src="/loading-spanner.svg" alt="Loading" />
         </div>
       )}
+
       <div className="header-hero">
         <h1>Welcome Back</h1>
         <h3>Log in to manage your appointments.</h3>
       </div>
 
-      <form className="form-login" id="form-login" onSubmit={submitFn}>
+      <div className="form-login">
         <p className="image-container">
           <img src="/doctorapp.svg" alt="Doctor appointment illustration" />
         </p>
 
         <div>
           <h1>Login</h1>
-          <input
-            type="email"
-            value={email}
-            placeholder="enter"
-            onChange={(e) => authFn.getInput(e, setEmail)}
-          />
-          <input
-            type="password"
-            placeholder="password"
-            value={password}
-            onChange={(e) => authFn.getInput(e, setPassword)}
-          />
-          <button type="submit">Login</button>
+
+          <form id="form-login" onSubmit={submitFn}>
+            <div>
+              <label htmlFor="email-input">
+                <span>@</span>
+              </label>
+              <input
+                type="email"
+                id="email-input"
+                value={email}
+                placeholder="enter"
+                onChange={(e) => authFn.getInput(e, setEmail)}
+              />
+            </div>
+
+            <div>
+              <label htmlFor="password-input">
+                <img src="/lock.svg" alt="" />
+              </label>
+              <input
+                type="password"
+                id="password-input"
+                placeholder="password"
+                value={password}
+                onChange={(e) => authFn.getInput(e, setPassword)}
+              />
+            </div>
+
+            <div>
+              <button type="submit">Login</button>
+            </div>
+          </form>
         </div>
-      </form>
+      </div>
+
       <div>
         {logFn.isSuccess && <h2>{logFn.data?.data?.status}</h2>}
 

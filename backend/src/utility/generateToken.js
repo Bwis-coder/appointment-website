@@ -12,7 +12,7 @@ res.cookie("jwt", token, {
   secure: true,
   sameSite: "none",
   maxAge: 60 * 60 * 1000 * 24 * 7,
-});;
+});
 
   return token;
 };

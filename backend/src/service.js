@@ -37,6 +37,8 @@ app.use("/book", appointmentRoute);
 
 // Serve frontend in production
 if (process.env.NODE_ENV === "production") {
+  console.log("Production mode: serving frontend from dist");
+
   app.use(express.static(path.join(__dirname, "../../frontend/dist")));
 
   app.get("/{*path}", (req, res) => {
